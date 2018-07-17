@@ -1,79 +1,58 @@
 // SASS variable for media query breakpoint
 $breakpoint-desktop: 992px;
 
-// Resetting default styles
 ul {
   padding: 0;
   margin: 0;
   list-style-type: none;
 }
 
-// Fix for jumping arrows
-.carousel-container {
+body {
+  padding: 0;
+  margin: 0;
+}
+
+#app {
   display: flex;
   flex-direction: column;
   justify-content: center;
   min-height: 210px;
 }
 
-.carousel {
+.carouselSlides {
   position: relative;
 }
 
 // Carousel slides
-.carousel__slide {
-  margin-right: auto;
-  margin-left: auto;
+.slide {
   display: none;
-  max-width: 900px;
-  list-style-type: none;
-  text-align: center;
+  width: 100%;
 
-  @media (max-width: 991px) {
-    padding-right: 60px;
-    padding-left: 60px;
-  }
-
-  &--active {
+  // &--active {
+  //   display: block;
+  // }
+  &.active {
     display: block;
   }
-}
 
-// Content of slides
-.carousel-slide__content {
-  margin-bottom: 19px;
-  font-family: 'Open Sans', 'Trebuchet MS', sans-serif;
-  font-size: 16px;
-
-  @media (max-width: $breakpoint-desktop - 1px) {
-    font-size: 18px;
+  img {
+    object-fit: cover;
+    max-height: 600px;
+    width: 100%;
   }
 }
 
-.carousel-slide__author,
-.carousel-slide__source {
-  font-family: 'Roboto', arial, sans-serif;
-  font-size: 14px;
-
-  @media (min-width: $breakpoint-desktop) {
-    font-size: 16px;
-  }
-}
-
-.carousel-slide__source {
-  font-style: italic;
-  color: #888;
-}
-
-// Carousel arrows
-.carousel__arrow {
+.arrow {
   position: absolute;
   top: 50%;
   display: block;
-  color: #111;
+  font-size: 22px;
   cursor: pointer;
+  border: none;
+  height: 50px;
+  border-radius: 50%;
+  width: 50px;
   opacity: .75;
-  transform: translateY(-50%);
   transition: opacity .15s cubic-bezier(.4, 0, 1, 1);
 
   &:focus {
@@ -84,17 +63,17 @@ ul {
     opacity: .5;
   }
 
-  &--left {
+  &.left {
     left: 32px;
   }
 
-  &--right {
+  &.right {
     right: 32px;
   }
 }
 
 // Carousel indicators
-.carousel__indicators {
+.indicators {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -107,7 +86,7 @@ ul {
   }
 }
 
-.carousel__indicator {
+.indicator {
   display: block;
   width: 24px;
   height: 3px;
@@ -120,7 +99,7 @@ ul {
     opacity: .5;
   }
 
-  &--active {
+  &.active {
     &,
     &:hover {
       opacity: .75;
