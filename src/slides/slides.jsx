@@ -16,8 +16,10 @@ class Slides extends Component {
       activeIndex: 0,
       type: {
         fade: 'fade',
-        none: 'none'
-      }
+        none: 'none',
+        move: 'move'
+      },
+      auto: true
     }
   }
 
@@ -32,6 +34,33 @@ class Slides extends Component {
         slides: data
       })
     })
+
+    this.state.auto ? (
+      this.auto = setInterval(() => {
+        // console.log('ok bien')
+        this.carouselAuto()
+      }, 3000)
+    ): null    
+  }
+
+  componentWillUnmount() {
+    this.state.auto ? clearTimeout(this.auto) : null
+  }
+
+  carouselAuto = () => {
+    let index = this.state.activeIndex;
+    let { slides } = this.state;
+    let slidesLength = slides.length - 1;
+    // console.log(`this is index -> ${index} this is slidesLength -> ${slidesLength}`)
+    if (index === slidesLength) {
+      index = -1;
+      // console.log('index es equal to slidesLength ' + index)
+    }
+    ++index;
+    // console.log('new index -> ' + index)
+    this.setState({
+      activeIndex: index
+    });
   }
 
   handleClickRight = (e) => {
@@ -85,7 +114,7 @@ class Slides extends Component {
               index={index}
               activeIndex={this.state.activeIndex}
               slide={slide}
-              type={this.state.type.none}
+              animation={this.state.type.move}
             />
           )}
         </ul>

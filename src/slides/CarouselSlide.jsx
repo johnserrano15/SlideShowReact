@@ -18,14 +18,13 @@ import React from 'react'
 // }
 
 const CarouselSlide = (props) => {
-  const { slide, index, activeIndex, type } = props
-  console.info(type)
+  const { slide, index, activeIndex, animation } = props
   return (
     <li
       className={
         index == activeIndex
-          ? `slide active ${type}`
-          : 'slide'
+          ? `slide active ${animation}`
+          : `slide`
       }
     >
       <img src={slide.urls.regular} alt={slide.urls.regular} />
