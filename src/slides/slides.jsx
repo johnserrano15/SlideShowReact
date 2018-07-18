@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import Slide from './Slide.jsx'
+import SlideLayout from './SlideLayout.jsx'
 import CarouselSlide from './CarouselSlide.jsx'
 import CarouselIndicator from './CarouselIndicator.jsx'
 
-import './slide.scss'
+import './slides.scss'
 
 import api from '../../api'
 
@@ -13,7 +13,11 @@ class Slides extends Component {
     super(props)
     this.state = {
       slides: [],
-      activeIndex: 0
+      activeIndex: 0,
+      type: {
+        fade: 'fade',
+        none: 'none'
+      }
     }
   }
 
@@ -36,15 +40,12 @@ class Slides extends Component {
     let { slides } = this.state;
     let slidesLength = slides.length - 1;
     // console.log(`this is index -> ${index} this is slidesLength -> ${slidesLength}`)
-
     if (index === slidesLength) {
       index = -1;
       // console.log('index es equal to slidesLength ' + index)
     }
-
     ++index;
     // console.log('new index -> ' + index)
-
     this.setState({
       activeIndex: index
     });
@@ -52,7 +53,6 @@ class Slides extends Component {
   
   handleClickLeft = (e) => {
     e.preventDefault();
-
     let index = this.state.activeIndex;
     let { slides } = this.state;
     let slidesLength = slides.length;
@@ -61,16 +61,15 @@ class Slides extends Component {
       index = slidesLength;
       // console.log('index es menor que 1 ' + index)
     }
-
     --index;
     // console.log('new index -> ' + index)
-
     this.setState({
       activeIndex: index
     });
   }
 
   goToSlide = (index) => (e) => {
+    e.preventDefault();
     this.setState({
       activeIndex: index
     });
@@ -78,20 +77,23 @@ class Slides extends Component {
 
   render() {
     return (
-      <Slide>
-        <ul className="carouselSlides">
+      <SlideLayout>
+        <ul className='carouselSlides'>
           {this.state.slides.map((slide, index) =>
             <CarouselSlide
               key={index}
               index={index}
               activeIndex={this.state.activeIndex}
               slide={slide}
+              type={this.state.type.none}
             />
           )}
         </ul>
-        <button className="arrow left" onClick={this.handleClickLeft}>&#10094;</button>
-        <button className="arrow right" onClick={this.handleClickRight}>&#10095;</button>
-        <ul className="indicators">
+
+        <button className='arrow left' onClick={this.handleClickLeft}>&#10094;</button>
+        <button className='arrow right' onClick={this.handleClickRight}>&#10095;</button>
+        
+        <ul className='indicators'>
           {this.state.slides.map((slide, index) =>
             <CarouselIndicator
               key={index}
@@ -101,7 +103,7 @@ class Slides extends Component {
             />
           )}
         </ul>
-      </Slide>
+      </SlideLayout>
     )
   }
 }
