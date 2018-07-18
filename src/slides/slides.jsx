@@ -114,7 +114,7 @@ class Slides extends Component {
               index={index}
               activeIndex={this.state.activeIndex}
               slide={slide}
-              animation={this.state.type.move}
+              animation={this.state.type.fade}
             />
           )}
         </ul>
@@ -123,12 +123,12 @@ class Slides extends Component {
         <button className='arrow right' onClick={this.handleClickRight}>&#10095;</button>
         
         <ul className='indicators'>
-          {Object.keys(this.state.slides).map(index =>
+          {Object.keys(this.state.slides).map((index) =>
             <CarouselIndicator
               key={index}
-              index={index}
+              index={parseInt(index)}
               activeIndex={this.state.activeIndex}
-              onClick={this.goToSlide(index)}
+              onClick={this.goToSlide(parseInt(index))}
             />
           )}
         </ul>
