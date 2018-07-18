@@ -19,7 +19,7 @@ class Slides extends Component {
         none: 'none',
         move: 'move'
       },
-      auto: true
+      auto: false
     }
   }
 
@@ -123,7 +123,7 @@ class Slides extends Component {
         <button className='arrow right' onClick={this.handleClickRight}>&#10095;</button>
         
         <ul className='indicators'>
-          {this.state.slides.map((slide, index) =>
+          {Object.keys(this.state.slides).map(index =>
             <CarouselIndicator
               key={index}
               index={index}
